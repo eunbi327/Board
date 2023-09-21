@@ -1,0 +1,33 @@
+buildscript {
+    ext {
+        springBootVersion = "2.1.7.RELEASE"
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+plugins {
+    id("java")
+    id("org.springframework.boot") version "2.7.15"
+    id("io.spring.dependency-management") version "1.0.15.RELEASE"
+}
+
+group = "org.Board"
+version = "1.0-SNAPSHOT"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}

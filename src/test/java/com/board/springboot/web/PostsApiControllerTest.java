@@ -50,7 +50,7 @@ public class PostsApiControllerTest {
                 .author("testAuthor")
                 .build();
 
-        String url = "http://localhost:" + port + "/api/v1/posts";
+        String url = "http://localhost:" + port + "/api/posts";
 
         // when
         ResponseEntity<Long> responseEntity = restRemplate.postForEntity(url, requestDto, Long.class);
@@ -82,7 +82,7 @@ public class PostsApiControllerTest {
                 .content(expectedContent)
                 .build();
 
-        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
+        String url = "http://localhost:" + port + "/api/posts/" + updateId;
         HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
         // when

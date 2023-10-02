@@ -12,18 +12,24 @@ import org.springframework.web.bind.annotation.*;
 public class PostsApiController {
     private final PostsService postsService;
 
-    @PostMapping("/api/v1/posts")
+    @PostMapping("/api/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto) {
         return postsService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/posts/{postId}")
+    @PutMapping("/api/posts/{postId}")
     public Long update(@PathVariable Long postId, @RequestBody PostsUpdateRequestDto requestDto) {
         return postsService.update(postId, requestDto);
     }
 
-    @GetMapping("/api/v1/posts/{postId}")
+    @GetMapping("/api/posts/{postId}")
     public PostsResponseDto findById(@PathVariable Long postId) {
         return postsService.findById(postId);
+    }
+
+    @DeleteMapping("/api/posts/{postId}")
+    public Long delete(@PathVariable Long postId) {
+        postsService.delete(postId);
+        return postId;
     }
 }

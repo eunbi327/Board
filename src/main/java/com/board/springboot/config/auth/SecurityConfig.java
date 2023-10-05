@@ -19,16 +19,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll()
-//                .antMatchers("/api/**").hasRole(Role.USER.name())
+                .antMatchers("/", "/posts/**", "/members/**", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll()
+//                .antMatchers("/api/**").hasAnyRole(Role.USER.name(), Role.SOCIAL.name())
                 .antMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login") // 로그인 페이지의 URL
+                .defaultSuccessUrl("/") // 로그인 성공 후 이동할 URL
+                .permitAll()
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
                 .and()
                 .oauth2Login()
                 .userInfoEndpoint()
-                .userService(customOAuth2UserService);
+                .userService(customOAuth2UserService)
+                .and();
     }
 }

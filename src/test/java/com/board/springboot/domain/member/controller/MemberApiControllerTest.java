@@ -69,11 +69,11 @@ public class MemberApiControllerTest {
         // TODO : 비밀번호 불일치 로직 테스트 코드 고치기
         // given
         String email = "test@email.com";
-        String nickname = "testnick";
+        String name = "testnick";
         String password = "Test01!";
         MemberRegisterRequestDto requestDto = MemberRegisterRequestDto.builder()
                 .email(email)
-                .nickname(nickname)
+                .name(name)
                 .password(password)
                 .confirmPassword(password)
                 .build();
@@ -89,11 +89,11 @@ public class MemberApiControllerTest {
         // then
         List<Member> all = memberRepository.findAll();
         assertThat(all.get(0).getEmail()).isEqualTo(email);
-        assertThat(all.get(0).getNickname()).isEqualTo(nickname);
+        assertThat(all.get(0).getName()).isEqualTo(name);
 
         Member member = all.get(0);
 
-        System.out.println(">>>>>> email = " + member.getEmail() + ", nickname = " + member.getNickname());
+        System.out.println(">>>>>> email = " + member.getEmail() + ", nickname = " + member.getName());
         System.out.println(">>>>>> password = " + member.getPassword() + ", confirmPassword = " + requestDto.getConfirmPassword());
 
     }
@@ -104,18 +104,18 @@ public class MemberApiControllerTest {
         // given
         Member memberRegister = memberRepository.save(Member.builder()
                 .email("test@email.com")
-                .nickname("testNick")
+                .name("testNick")
                 .password("Test01!")
                 .role(Role.USER)
                 .build());
 
         Long updateId = memberRegister.getUserId();
 
-        String expectedNickname = "nickname2";
+        String expectedName = "nickname2";
         String expectedPassword = "Password2!";
 
         MemberUpdateRequestDto requestDto = MemberUpdateRequestDto.builder()
-                .nickname(expectedNickname)
+                .name(expectedName)
                 .password(expectedPassword)
                 .build();
 
@@ -129,7 +129,7 @@ public class MemberApiControllerTest {
 
         // then
         List<Member> all = memberRepository.findAll();
-        assertThat(all.get(0).getNickname()).isEqualTo(expectedNickname);
+        assertThat(all.get(0).getName()).isEqualTo(expectedName);
         assertThat(all.get(0).getPassword()).isEqualTo(expectedPassword);
     }
 }

@@ -72,13 +72,13 @@ const main = {
     },
     register : function () {
         const email = $('#email').val();
-        const nickname = $('#name').val();
+        const name = $('#name').val();
         const password = $('#password').val();
         const confirmPassword = $('#confirmPassword').val();
 
         const data = {
             email: email,
-            nickname: nickname,
+            name: name,
             password: password,
             confirmPassword: confirmPassword
         };
@@ -90,6 +90,8 @@ const main = {
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
+            alert('회원가입이 완료되었습니다.');
+            window.location.href = '/';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

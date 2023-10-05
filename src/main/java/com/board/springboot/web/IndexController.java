@@ -32,15 +32,15 @@ public class IndexController {
         return "posts-update";
     }
 
-    @GetMapping("posts/{postId}")
+    @GetMapping("/posts/{postId}")
     public String postsDetail(@PathVariable Long postId, Model model) {
         PostsResponseDto dto = postsService.findById(postId);
         model.addAttribute("post", dto);
         return "posts-detail";
     }
 
-    @GetMapping("members/register")
-    public String memberRegister() {
-        return "member-register";
+    @GetMapping("/members/register")
+    public String membersRegister() {
+        return "members-register";
     }
 }

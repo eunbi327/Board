@@ -29,11 +29,11 @@ public class MemberRepositoryTest {
     public void 회원저장_불러오기() {
         // given
         String email = "test@email.com";
-        String nickname = "testnick";
+        String name = "testnick";
 
         memberRepository.save(Member.builder()
                 .email(email)
-                .nickname(nickname)
+                .name(name)
                 .password("Test01!")
                 .role(Role.USER)
                 .build());
@@ -44,7 +44,7 @@ public class MemberRepositoryTest {
         // then
         Member member = memberList.get(0);
         assertThat(member.getEmail()).isEqualTo(email);
-        assertThat(member.getNickname()).isEqualTo(nickname);
+        assertThat(member.getName()).isEqualTo(name);
     }
 
 }

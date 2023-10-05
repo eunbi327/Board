@@ -1,13 +1,12 @@
 package com.board.springboot.web;
 
-import com.board.springboot.service.PostsService;
-import com.board.springboot.web.dto.PostsResponseDto;
+import com.board.springboot.domain.posts.service.PostsService;
+import com.board.springboot.domain.posts.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 
 @RequiredArgsConstructor
 @Controller
@@ -38,5 +37,10 @@ public class IndexController {
         PostsResponseDto dto = postsService.findById(postId);
         model.addAttribute("post", dto);
         return "posts-detail";
+    }
+
+    @GetMapping("members/register")
+    public String memberRegister() {
+        return "member-register";
     }
 }

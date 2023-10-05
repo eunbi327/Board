@@ -19,26 +19,26 @@ public class Member extends BaseTimeEntity {
     private String name;
 
     @Column(nullable = false)
-    private String email;
+    private String password;
 
-    @Column
-    private String picture;
+    @Column(nullable = false)
+    private String email;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
     @Builder
-    public Member(String name, String email, String picture, Role role) {
+    public Member(String name, String password, String email, String picture, Role role) {
         this.name = name;
+        this.password = password;
         this.email = email;
-        this.picture = picture;
         this.role = role;
     }
 
-    public Member update(String name, String picture) {
+    public Member update(String name, String password) {
         this.name = name;
-        this.picture = picture;
+        this.password = password;
 
         return this;
     }

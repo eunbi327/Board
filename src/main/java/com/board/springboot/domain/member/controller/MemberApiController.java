@@ -7,13 +7,15 @@ import com.board.springboot.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @RestController
 public class MemberApiController {
     private final MemberService memberService;
 
     @PostMapping("/api/members")
-    public Long register(@RequestBody MemberRegisterRequestDto requestDto) {
+    public Long register(@Valid @RequestBody MemberRegisterRequestDto requestDto) {
         return memberService.register(requestDto);
     }
 

@@ -20,7 +20,7 @@ public class MemberService {
             throw new IllegalArgumentException("이미 등록된 이메일 주소입니다.");
         }
 
-        if (!requestDto.getConfirmPassword()) {
+        if (!requestDto.isConfirmPasswordValid()) {
             throw new IllegalArgumentException("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         }
 

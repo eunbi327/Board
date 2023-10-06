@@ -41,9 +41,11 @@ public class PostsService {
         postsRepository.delete(posts);
     }
 
+    @Transactional
     public PostsResponseDto findById(Long postId) {
         Posts entity = postsRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. 글 번호 : " + postId));
+        postsRepository.viewCount(postId);
         return new PostsResponseDto(entity);
     }
 

@@ -1,5 +1,7 @@
 package com.board.springboot.domain.posts.controller;
 
+import com.board.springboot.config.auth.dto.LoginUser;
+import com.board.springboot.config.auth.dto.SessionUser;
 import com.board.springboot.domain.posts.service.PostsService;
 import com.board.springboot.domain.posts.dto.PostsResponseDto;
 import com.board.springboot.domain.posts.dto.PostsSaveRequestDto;
@@ -13,8 +15,8 @@ public class PostsApiController {
     private final PostsService postsService;
 
     @PostMapping("/api/posts")
-    public Long save(@RequestBody PostsSaveRequestDto requestDto) {
-        return postsService.save(requestDto);
+    public Long save(@RequestBody PostsSaveRequestDto requestDto, @LoginUser SessionUser member) {
+        return postsService.save(member.getName(), requestDto);
     }
 
     @PutMapping("/api/posts/{postId}")

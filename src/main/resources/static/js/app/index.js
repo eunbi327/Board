@@ -2,19 +2,25 @@ const main = {
     init : function () {
         const _this = this;
         $('#btn-save').on('click', function () {
-            _this.save();
+            _this.post_save();
         });
         $('#btn-update').on('click', function () {
-            _this.update();
+            _this.post_update();
         });
         $('#btn-delete').on('click', function () {
-            _this.delete();
+            _this.post_delete();
         });
-        $('#btn-register').on('click', function () {
-            _this.register();
-        })
+        $('#btn-comment-save').on('click', function () {
+            _this.comment_save();
+        });
+        $('#btn-comment-update').on('click', function () {
+            _this.comment_update();
+        });
+        $('#btn-comment-delete').on('click', function () {
+            _this.comment_delete();
+        });
     },
-    save : function () {
+    post_save : function () {
         const data = {
             title: $('#title').val(),
             author: $('#author').val(),
@@ -34,13 +40,13 @@ const main = {
             alert(JSON.stringify(error));
         });
     },
-    update : function () {
+    post_update : function () {
         const data = {
             title: $('#title').val(),
             content: $('#content').val()
         };
 
-        const postId = $('#id').val();
+        const postId = $('#postId').val();
 
         $.ajax({
             type: 'PUT',
@@ -55,8 +61,8 @@ const main = {
             alert(JSON.stringify(error));
         });
     },
-    delete : function () {
-        const postId = $('#id').val();
+    post_delete : function () {
+        const postId = $('#postId').val();
 
         $.ajax({
             type: 'DELETE',
@@ -70,32 +76,62 @@ const main = {
             alert(JSON.stringify(error));
         });
     },
-    register : function () {
-        const email = $('#email').val();
-        const name = $('#name').val();
-        const password = $('#password').val();
-        const confirmPassword = $('#confirmPassword').val();
-
+    comment_save : function () {
         const data = {
-            email: email,
-            name: name,
-            password: password,
-            confirmPassword: confirmPassword
+            postId: $('#postId').val(),
+            content: $('#comment-content').val()
         };
 
         $.ajax({
             type: 'POST',
-            url: '/api/members/',
+            url: '/api/comments/' + data.postId,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            alert('회원가입이 완료되었습니다.');
-            window.location.href = '/';
+            alert('댓글이 등록되었습니다.');
+            window.location.reload();
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    }
+    },
+    comment_update : function () {
+        const data = {
+            content: $('#comment-content').val()
+        };
+
+        const postId = $('#postId').val();
+        const commentId = $('#commentId').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/comments/' + postId + '/' + commentId,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('댓글이 수정되었습니다.');
+            window.location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    comment_delete : function () {
+        const postId = $('#postId').val();
+        const commentId = $('#commentId').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/comments/' + postId + '/' + commentId,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function() {
+            alert('댓글이 삭제되었습니다.');
+            window.location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
 };
 
 main.init();

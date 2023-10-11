@@ -1,5 +1,6 @@
-package com.board.springboot.domain.posts.dto;
+package com.board.springboot.domain.commnets.dto;
 
+import com.board.springboot.domain.commnets.Comments;
 import com.board.springboot.domain.member.Member;
 import com.board.springboot.domain.posts.Posts;
 import lombok.Builder;
@@ -7,32 +8,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
-public class PostsSaveRequestDto {
-    private String title;
+public class CommentsSaveRequestDto {
     private String content;
     private String author;
-    private int viewCount;
     private Member member;
+    private Posts posts;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author, int viewCount, Member member) {
-        this.title = title;
+    public CommentsSaveRequestDto(String content, String author, Member member, Posts posts) {
         this.content = content;
         this.author = author;
-        this.viewCount = viewCount;
         this.member = member;
+        this.posts = posts;
     }
 
-    public Posts toEntity() {
-        return Posts.builder()
-                .title(title)
+    public Comments toEntity() {
+        return Comments.builder()
                 .content(content)
                 .author(author)
-                .viewCount(viewCount)
                 .member(member)
+                .posts(posts)
                 .build();
     }
 }

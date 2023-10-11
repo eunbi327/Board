@@ -1,16 +1,15 @@
 package com.board.springboot.domain.posts;
 
 import com.board.springboot.domain.BaseTimeEntity;
+import com.board.springboot.domain.commnets.Comments;
+import com.board.springboot.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -33,12 +32,23 @@ public class Posts extends BaseTimeEntity {
     @Column(columnDefinition = "INTEGER DEFAULT 0")
     private int viewCount;
 
+    // 사용자 엔티티와 다대일 관계 설정
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Member member;
+
+    // 댓글 엔티티와의 양방향 관계 설정
+    @OneToMany(mappedBy = "posts", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc")
+    private List<Comments> comments;
+
     @Builder
-    public Posts(String title, String content, String author, int viewCount) {
+    public Posts(String title, String content, String author, int viewCount, Member member) {
         this.title = title;
         this.content = content;
         this.author = author;
         this.viewCount = viewCount;
+        this.member = member;
     }
 
     public void update(String title, String content) {

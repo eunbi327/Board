@@ -1,5 +1,8 @@
 package com.board.springboot.domain.posts.service;
 
+import com.board.springboot.config.auth.dto.SessionUser;
+import com.board.springboot.domain.member.Member;
+import com.board.springboot.domain.member.MemberRepository;
 import com.board.springboot.domain.posts.Posts;
 import com.board.springboot.domain.posts.PostsRepository;
 import com.board.springboot.domain.posts.dto.PostsListResponseDto;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,9 +22,15 @@ import java.util.stream.Collectors;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
-    public Long save(PostsSaveRequestDto requestDto) {
+    public Long save(String author, PostsSaveRequestDto requestDto) {
+        Member member = memberRepository.findByName(author)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. 회원 이름 : " + author));
+
+        requestDto.setAuthor(author);
+        requestDto.setMember(member);
         return postsRepository.save(requestDto.toEntity()).getPostId();
     }
 

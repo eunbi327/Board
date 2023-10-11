@@ -1,13 +1,18 @@
 package com.board.springboot.domain.member;
 
 import com.board.springboot.domain.BaseTimeEntity;
+import com.board.springboot.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Member extends BaseTimeEntity {
@@ -19,9 +24,6 @@ public class Member extends BaseTimeEntity {
     private String name;
 
     @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false)
     private String email;
 
     @Enumerated(EnumType.STRING)
@@ -29,16 +31,14 @@ public class Member extends BaseTimeEntity {
     private Role role;
 
     @Builder
-    public Member(String name, String password, String email, String picture, Role role) {
+    public Member(String name, String email, Role role) {
         this.name = name;
-        this.password = password;
         this.email = email;
         this.role = role;
     }
 
-    public Member update(String name, String password) {
+    public Member update(String name) {
         this.name = name;
-        this.password = password;
 
         return this;
     }

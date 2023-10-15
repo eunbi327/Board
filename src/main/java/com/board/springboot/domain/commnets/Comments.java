@@ -27,11 +27,11 @@ public class Comments extends BaseTimeEntity {
     private String author;
 
     // 게시글, 사용자 엔티티와 다대일 관계 설정
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "post_id")
     private Posts posts;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private Member member;
 

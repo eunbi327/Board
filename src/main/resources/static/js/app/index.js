@@ -19,9 +19,10 @@ const main = {
                 _this.comment_update(form);
             });
         });
-        $('#btn-comment-delete').on('click', function () {
-            _this.comment_delete();
-        });
+        $('[id^="btn-comment-delete-"]').on('click', function () {
+               const commentId = this.id.split('-')[3];
+               _this.comment_delete(commentId);
+           });
     },
     post_save : function () {
         const data = {
@@ -100,11 +101,11 @@ const main = {
     },
     comment_update : function (form) {
         const data = {
-            content: $('#comment-content-update').val()
+            content: form.querySelector('#comment-content-update').value
         };
 
-        postId: $('#postId').val();
-        const commentId = $('#commentId').val();
+        const postId = form.querySelector('#postId').value;
+        const commentId = form.querySelector('#commentId').value;
 
         $.ajax({
             type: 'PUT',
@@ -119,8 +120,7 @@ const main = {
             alert(JSON.stringify(error));
         });
     },
-    comment_delete : function () {
-        const commentId = $('#commentId').val();
+    comment_delete : function (commentId) {
 
         $.ajax({
             type: 'DELETE',
@@ -130,8 +130,10 @@ const main = {
         }).done(function() {
             alert('댓글이 삭제되었습니다.');
             window.location.reload();
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+              console.log('Ajax request failed with status: ' + textStatus);
+              console.log('Error: ' + errorThrown);
+              console.log('Response Text: ' + jqXHR.responseText);
         });
     },
 };

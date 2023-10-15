@@ -11,14 +11,13 @@
                 <a type="button" data-toggle="collapse"
                    data-target=".multi-collapse-{{commentId}}"
                    class="bi bi-pencil-square">수정</a>
-
-                <a type="button" id="btn-comment-delete" class="bi bi-x-square">삭제</a>
+                <a type="button" id="btn-comment-delete-{{commentId}}" class="bi bi-x-square">삭제</a>
 
                 <p class="collapse multi-collapse-{{commentId}} show">{{content}}</p>
 
                 <form class="collapse multi-collapse-{{commentId}}">
-                    <input type="hidden" id="commentId" value="{{commentId}}">
                     <input type="hidden" id="postId" value="{{postId}}">
+                    <input type="hidden" id="commentId" value="{{commentId}}">
                     <div class="form-group">
                         <textarea class="form-control" id="comment-content-update" rows="4">{{content}}</textarea>
                     </div>

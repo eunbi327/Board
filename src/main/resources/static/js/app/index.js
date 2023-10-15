@@ -13,8 +13,11 @@ const main = {
         $('#btn-comment-save').on('click', function () {
             _this.comment_save();
         });
-        $('#btn-comment-update').on('click', function () {
-            _this.comment_update();
+        document.querySelectorAll('#btn-comment-update').forEach(function (item) {
+            item.addEventListener('click', function () {
+                const form = this.closest('form');
+                _this.comment_update(form);
+            });
         });
         $('#btn-comment-delete').on('click', function () {
             _this.comment_delete();
@@ -90,22 +93,22 @@ const main = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('댓글이 등록되었습니다.');
-            window.location.reload();
+            window.location.href = '/posts/' + data.postId;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
     },
-    comment_update : function () {
+    comment_update : function (form) {
         const data = {
-            content: $('#comment-content').val()
+            content: $('#comment-content-update').val()
         };
 
-        const postId = $('#postId').val();
+        postId: $('#postId').val();
         const commentId = $('#commentId').val();
 
         $.ajax({
             type: 'PUT',
-            url: '/api/comments/' + postId + '/' + commentId,
+            url: '/api/comments/' + commentId,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -117,12 +120,11 @@ const main = {
         });
     },
     comment_delete : function () {
-        const postId = $('#postId').val();
         const commentId = $('#commentId').val();
 
         $.ajax({
             type: 'DELETE',
-            url: '/api/comments/' + postId + '/' + commentId,
+            url: '/api/comments/' + commentId,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function() {

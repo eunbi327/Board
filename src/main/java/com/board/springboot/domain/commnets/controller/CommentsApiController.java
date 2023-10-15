@@ -19,19 +19,18 @@ public class CommentsApiController {
         return commentsService.save(member.getName(), postId, requestDto);
     }
 
-    @PutMapping("/api/comments/{postId}/{commentId}")
+    @PutMapping("/api/comments/{commentId}")
     public Long update(@PathVariable Long commentId, @RequestBody CommentsUpdateRequestDto requestDto) {
         return commentsService.update(commentId, requestDto);
     }
 
-    @GetMapping("/api/comments/{postId}/{commentId}")
+    @GetMapping("/api/comments/{commentId}")
     public CommentsResponseDto findById(@PathVariable Long commentId) {
         return commentsService.findById(commentId);
     }
 
-    @DeleteMapping("/api/comments/{postId}/{commentId}")
-    public Long delete(@PathVariable Long commentId) {
+    @DeleteMapping("/api/comments/{commentId}")
+    public void delete(@PathVariable Long commentId) {
         commentsService.delete(commentId);
-        return commentId;
     }
 }

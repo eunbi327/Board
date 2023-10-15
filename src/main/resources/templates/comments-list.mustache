@@ -6,29 +6,27 @@
             <li id="{{commentId}}" class="list-group-item">
                 <span>
                     <span style="font-size: small">{{author}}</span>
-                    <span style="font-size: xx-small">{{!createdDate}}</span>
-                    <button id="btn-comment-update" class="badge bi bi-pencil-square"> 수정</button>
-                    <button id="btn-comment-delete" class="badge bi bi-trash"> 삭제</button>
+                    <span style="font-size: xx-small">{{modifiedDate}}</span>
                 </span>
-                <div>{{content}}</div>
-                <!--                <a type="button" data-toggle="collapse" data-target=".multi-collapse-{{!commentId}}"-->
-                <!--                   class="bi bi-pencil-square"></a>-->
-                <!--                <a type="button" onclick="main.commentDelete({{!postId}},{{!commentId}},{{!userId}},{{!user.userId}})"-->
-                <!--                   class="bi bi-x-square"></a>-->
+                <a type="button" data-toggle="collapse"
+                   data-target=".multi-collapse-{{commentId}}"
+                   class="bi bi-pencil-square">수정</a>
 
-                <!--                <p class="collapse multi-collapse-{{!commentId}} show">{{!content}}</p>-->
+                <a type="button" id="btn-comment-delete" class="bi bi-x-square">삭제</a>
 
-                <!--                <form class="collapse multi-collapse-{{!commentId}}">-->
-                <!--                    <input type="hidden" id="commentId" value="{{!commentId}}">-->
-                <!--                    <input type="hidden" id="authorUserId" value="{{!userId}}">-->
-                <!--                    <input type="hidden" id="sessionUserId" value="{{!#user}}{{!user.userId}}{{!/user}}">-->
-                <!--                    <div class="form-group">-->
-                <!--                        <textarea class="form-control" id="comment-content" rows="3">{{!content}}</textarea>-->
-                <!--                    </div>-->
-                <!--                    <button type="button" id="btn-comment-update" class="btn btn-outline-primary bi bi-pencil-square">-->
-                <!--                        수정-->
-                <!--                    </button>-->
-                <!--                </form>-->
+                <p class="collapse multi-collapse-{{commentId}} show">{{content}}</p>
+
+                <form class="collapse multi-collapse-{{commentId}}">
+                    <input type="hidden" id="commentId" value="{{commentId}}">
+                    <input type="hidden" id="postId" value="{{postId}}">
+                    <div class="form-group">
+                        <textarea class="form-control" id="comment-content-update" rows="4">{{content}}</textarea>
+                    </div>
+                    <button type="button" id="btn-comment-update" class="bi bi-pencil-square">
+                        수정
+                    </button>
+                </form>
+
             </li>
         {{/comments}}
     </ul>

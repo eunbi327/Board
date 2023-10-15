@@ -1,6 +1,5 @@
 package com.board.springboot.domain.commnets.service;
 
-import com.board.springboot.config.auth.dto.SessionUser;
 import com.board.springboot.domain.commnets.Comments;
 import com.board.springboot.domain.commnets.CommentsRepository;
 import com.board.springboot.domain.commnets.dto.CommentsResponseDto;
@@ -13,8 +12,6 @@ import com.board.springboot.domain.posts.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Service
@@ -43,19 +40,20 @@ public class CommentsService {
         Comments comments = commentsRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다. 댓글 번호 : " + commentId));
         comments.update(requestDto.getContent());
-
         return commentId;
     }
 
+    @Transactional
     public CommentsResponseDto findById(Long commentId) {
         Comments entity = commentsRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다. 댓글 번호 : " + commentId));
         return new CommentsResponseDto(entity);
     }
 
+    @Transactional
     public void delete(Long commentId) {
         Comments comments = commentsRepository.findById(commentId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. 글 번호 : " + commentId));
+                .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다. 댓글 번호 : " + commentId));
 
         commentsRepository.delete(comments);
     }

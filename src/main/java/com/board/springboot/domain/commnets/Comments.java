@@ -3,6 +3,7 @@ package com.board.springboot.domain.commnets;
 import com.board.springboot.domain.BaseTimeEntity;
 import com.board.springboot.domain.member.Member;
 import com.board.springboot.domain.posts.Posts;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,11 +27,11 @@ public class Comments extends BaseTimeEntity {
     private String author;
 
     // 게시글, 사용자 엔티티와 다대일 관계 설정
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
     private Posts posts;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private Member member;
 

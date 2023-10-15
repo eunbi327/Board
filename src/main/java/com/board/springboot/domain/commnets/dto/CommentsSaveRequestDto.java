@@ -26,11 +26,12 @@ public class CommentsSaveRequestDto {
     }
 
     public Comments toEntity() {
-        return Comments.builder()
+        Comments comments = Comments.builder()
                 .content(content)
                 .author(author)
                 .member(member)
                 .posts(posts)
                 .build();
+        return comments;
     }
 }

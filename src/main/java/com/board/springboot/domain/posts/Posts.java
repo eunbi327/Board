@@ -3,6 +3,8 @@ package com.board.springboot.domain.posts;
 import com.board.springboot.domain.BaseTimeEntity;
 import com.board.springboot.domain.commnets.Comments;
 import com.board.springboot.domain.member.Member;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -32,7 +32,7 @@
 
 ### ERD 다이어그램
 
-![ERD 다이어그램]("https://github.com/eunbi327/Board/blob/eb2dd90c07fceb2bb298aa3c9d7c463653fea8d6/src/main/resources/img/ERD.png")
+![ERD](https://github.com/eunbi327/Board/assets/105216227/bda81897-7973-4066-977e-89448c99b1c2)
 
 ---
 
